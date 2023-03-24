@@ -14,10 +14,11 @@ use App\Http\Controllers\HeroesController;
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function () {
+    return view('auth.login');
 });
 
+/*
 Route::get('/Heroes', function () {
     return view('Vistas_heroes.index');
 });*/
@@ -25,4 +26,9 @@ Route::get('/Heroes', function () {
 Route::resource('Vistas_heroes',HeroesController::class);
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HeroesController::class, 'index'])->name('home');
+
+Route::group(['middleware' => 'auth'], function(){
+
+    Route::get('/home', [HeroesController::class, 'index'])->name('home');
+});

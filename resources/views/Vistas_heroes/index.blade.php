@@ -1,5 +1,12 @@
+@extends('layouts.app')
 
-<a href="{{url('/Vistas_heroes/create')}}"> Agregar nuevo Heroe</a>
+@section('content')
+<div class="container">
+
+
+<a href="{{url('/Vistas_heroes/create')}}" class="btn btn.success"> Agregar nuevo Heroe</a>
+<br>
+<br>
 <div class="table-responsive">
 <table class="table table-ligth">
         <thead class="table-ligth">
@@ -20,13 +27,13 @@
              <td>{{$heroe->Info_Extra}}</td>
              <td>
 
-             <a href="{{url('/Vistas_heroes/'.$heroe->id.'/edit')}}"> editar</a>
+             <a href="{{url('/Vistas_heroes/'.$heroe->id.'/edit')}}" class="btn btn.warnig"> editar</a>
                 
-             <form action="{{url('/Vistas_heroes/'.$heroe->id)}}" method="post">
+             <form action="{{url('/Vistas_heroes/'.$heroe->id)}}" class="d-inline" method="post" >
                 @csrf
                 
                 {{method_field('DELETE')}}
-                <input type="submit"  onclick="return confirm('¿Quieres borrar?')" value="Borrar">
+                <input class="btn btn.danger" type="submit"  onclick="return confirm('¿Quieres borrar?')" value="Borrar" >
                 
             </form>
              
@@ -36,3 +43,5 @@
         </tbody>
     </table>
 </div>
+</div>
+@endsection
