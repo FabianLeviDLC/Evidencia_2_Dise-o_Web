@@ -23,12 +23,12 @@ Route::get('/Heroes', function () {
     return view('Vistas_heroes.index');
 });*/
 
-Route::resource('Vistas_heroes',HeroesController::class);
+Route::resource('Vistas_heroes',HeroesController::class)->middleware('auth');
 Auth::routes();
 
 Route::get('/home', [HeroesController::class, 'index'])->name('home');
 
 Route::group(['middleware' => 'auth'], function(){
 
-    Route::get('/home', [HeroesController::class, 'index'])->name('home');
+Route::get('/home', [HeroesController::class, 'index'])->name('home');
 });
