@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HeroesController;
-
+use App\Http\Controllers\PedidosController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,4 +31,18 @@ Route::get('/home', [HeroesController::class, 'index'])->name('home');
 Route::group(['middleware' => 'auth'], function(){
 
 Route::get('/home', [HeroesController::class, 'index'])->name('home');
+
+});
+
+
+
+Route::resource('Vistas_pedidos',PedidosController::class)->middleware('auth');
+Auth::routes();
+
+Route::get('/home', [PedidosController::class, 'index'])->name('home');
+
+Route::group(['middleware' => 'auth'], function(){
+
+Route::get('/home', [PedidosController::class, 'index'])->name('home');
+
 });

@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Heroes;
+use App\Models\pedidos;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Storage;
 
-class HeroesController extends Controller
+class PedidosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +17,8 @@ class HeroesController extends Controller
     public function index()
     {
         //
-        $datos['Vistas_heroes']=Heroes::paginate(6);
-        return view('Vistas_heroes.index',$datos);
+        $datos['Vistas_pedidos']=pedidos::paginate(8);
+        return view('Vistas_pedidos.index',$datos);
     }
 
     /**
@@ -30,7 +29,7 @@ class HeroesController extends Controller
     public function create()
     {
         //
-        return view('Vistas_heroes.create');
+        return view('Vistas_pedidos.create');
     }
 
     /**
@@ -42,24 +41,20 @@ class HeroesController extends Controller
     public function store(Request $request)
     {
         //
-        $datos_heroe = request()->except('_token');
+        $datos_pedidos = request()->except('_token');
 
-        if($request->hasFile('Foto')){
-            $datos_heroe['Foto']=$request->file('Foto')->store('uploads','public');
-        }
+        pedidos::insert($datos_pedidos);
 
-        Heroes::insert($datos_heroe);
-
-        return redirect('Vistas_heroes');
+        return redirect('Vistas_pedidos');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Heroes  $heroes
+     * @param  \App\Models\pedidos  $pedidos
      * @return \Illuminate\Http\Response
      */
-    public function show(Heroes $heroes)
+    public function show(pedidos $pedidos)
     {
         //
     }
@@ -67,50 +62,44 @@ class HeroesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Heroes  $heroes
+     * @param  \App\Models\pedidos  $pedidos
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         //
-        $heroe = Heroes::findOrFail($id);
-        return view('Vistas_heroes.edit', compact('heroe'));
+        $pedido = pedidos::findOrFail($id);
+        return view('Vistas_pedidos.edit', compact('pedido'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Heroes  $heroes
+     * @param  \App\Models\pedidos  $pedidos
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         //
-        $datos_heroe = request()->except(['_token', '_method']);
+        $datos_pedidos = request()->except(['_token', '_method']);
 
-        if($request->hasFile('Foto')){
-            $heroe = Heroes::findOrFail($id);
-            Storage::delete('public/'.$heroe->Foto);
-            $datos_heroe['Foto']=$request->file('Foto')->store('uploads','public');
-        }
+        pedidos::where('id','=',$id)->update($datos_pedidos);
 
-        Heroes::where('id','=',$id)->update($datos_heroe);
-
-        $heroe = Heroes::findOrFail($id);
-        return view('Vistas_heroes.edit', compact('heroe'));
+        $pedido = pedidos::findOrFail($id);
+        return view('Vistas_pedidos.edit', compact('pedido'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Heroes  $heroes
+     * @param  \App\Models\pedidos  $pedidos
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
-        Heroes::destroy($id);
-        return redirect('Vistas_heroes');
+        pedidos::destroy($id);
+        return redirect('Vistas_pedidos');
     }
 }

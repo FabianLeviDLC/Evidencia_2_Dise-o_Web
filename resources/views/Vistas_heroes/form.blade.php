@@ -8,16 +8,31 @@
 
 <div class="form-grup">
 
-<label for="Inserta el Super Nombre">Inserta el Super Nombre</label>
-<input type="text" class="form-control" name="Super_Nombre" value="{{isset($heroe->Super_Nombre)?$heroe->Super_Nombre:''}}" id="Super_Nombre">
+<label for="Inserta la descripcion">Inserta la Descripcion</label>
+<input type="text" class="form-control" name="Descripcion" value="{{isset($heroe->Descripcion)?$heroe->Descripcion:''}}" id="Descripcion">
 
 </div>
 
 <div class="form-grup">
 
-<label for="Inserta alguna informacion adicional">Inserta alguna informacion adicional</label>
-<input type="text" class="form-control" name="Info_Extra" value="{{isset($heroe->Info_Extra)?$heroe->Info_Extra:''}}" id="Info_Extra">
+<label for="Inserta Foto">Inserta Foto</label>
+
+<input type="file" class="form-control" name="Foto" id="Foto">
 
 </div>
+
+<div class="form-grup">
+
+    <label for="Inserta Precio">Inserta Precio</label>
+    <input type="text" class="form-control" name="Precio" value="{{isset($heroe->Precio)?$heroe->Precio:''}}" id="Precio">
+    
+    </div>
+
+<div class="form-grup">
+
+    <label for="Inserta Stock">Inserta Stock</label>
+    <input type="text" class="form-control" name="Stock" value="{{isset($heroe->Stock)?$heroe->Stock:''}}" id="Stock">
+        
+    </div>
 
 <input class="btn btn.success" type="submit" value="Agregar">

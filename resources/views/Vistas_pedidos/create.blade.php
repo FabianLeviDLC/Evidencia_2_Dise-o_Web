@@ -6,9 +6,9 @@
 
 Formulario de Create
 
-<form action="{{url('/Vistas_heroes')}}" method="post">
+<form action="{{url('/Vistas_pedidos')}}" method="post">
  @csrf
-@include('Vistas_heroes.form')
+@include('Vistas_pedidos.form')
 
 </form>
 

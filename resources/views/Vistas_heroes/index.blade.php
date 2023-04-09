@@ -4,7 +4,7 @@
 <div class="container">
 
 
-<a href="{{url('/Vistas_heroes/create')}}" class="btn btn.success"> Agregar nuevo Heroe</a>
+<a href="{{url('/Vistas_heroes/create')}}" class="btn btn.success"> Agregar nuevo Producto</a>
 <br>
 <br>
 <div class="table-responsive">
@@ -13,8 +13,10 @@
             <tr>
                 <th>id</th>
                 <th>Nombre</th>
-                <th>Super_Nombre</th>
-                <th>Info_Extra</th>
+                <th>Descripcion</th>
+                <th>Foto</th>
+                <th>Precio</th>
+                <th>Stock</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -23,8 +25,14 @@
             <tr>
              <td>{{$heroe->id}}</td>
              <td>{{$heroe->Nombre}}</td>
-             <td>{{$heroe->Super_Nombre}}</td>
-             <td>{{$heroe->Info_Extra}}</td>
+             <td>{{$heroe->Descripcion}}</td>
+
+             <td>
+                <img src="{{ asset('storage').'/'.$heroe->Foto}}" alt="">
+            </td>
+            
+             <td>{{$heroe->Precio}}</td>
+             <td>{{$heroe->Stock}}</td>
              <td>
 
              <a href="{{url('/Vistas_heroes/'.$heroe->id.'/edit')}}" class="btn btn.warnig"> editar</a>

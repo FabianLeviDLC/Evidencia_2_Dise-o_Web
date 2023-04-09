@@ -5,11 +5,11 @@
 
     Formulario de Edit
 
-<form action="{{url('/Vistas_heroes/'.$heroe->id)}}" method="post">
+<form action="{{url('/Vistas_pedidos/'.$pedido->id)}}" method="post">
     @csrf
     
     {{method_field('PATCH')}}
-    @include('Vistas_heroes.form')
+    @include('Vistas_pedidos.form')
    
    </form>
    
