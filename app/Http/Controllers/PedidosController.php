@@ -6,6 +6,7 @@ use App\Models\pedidos;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Heroes;
 
 class PedidosController extends Controller
 {
@@ -29,7 +30,9 @@ class PedidosController extends Controller
     public function create()
     {
         //
-        return view('Vistas_pedidos.create');
+        $pedido = new pedidos();
+        $precio = Heroes::pluck('Precio', 'id');
+        return view('Vistas_pedidos.create',compact('pedido', 'precio'));
     }
 
     /**
@@ -41,7 +44,13 @@ class PedidosController extends Controller
     public function store(Request $request)
     {
         //
-        $datos_pedidos = request()->except('_token');
+        $datos_pedidos = $request->except('_token');
+
+        $producto = Heroes::find($datos_pedidos['IdProducto']);
+        $PrecioUnitario = $producto->Precio;
+        $cantidad = $datos_pedidos['Cantidad'];
+        $datos_pedidos['PrecioUnitario'] = $PrecioUnitario;
+        $datos_pedidos['PrecioTotal'] = $PrecioUnitario * $cantidad;
 
         pedidos::insert($datos_pedidos);
 
@@ -87,6 +96,12 @@ class PedidosController extends Controller
         pedidos::where('id','=',$id)->update($datos_pedidos);
 
         $pedido = pedidos::findOrFail($id);
+
+        if ($pedido->Estatus == 'entregado') {
+            $heroe = Heroes::findOrFail($pedido->IdProducto);
+            $heroe->Stock -= $pedido->Cantidad;
+            $heroe->save();
+        }
         return view('Vistas_pedidos.edit', compact('pedido'));
     }
 
