@@ -15,20 +15,6 @@
 
 <div class="form-grup">
 
-    <label for="Inserta el Precio Unitario">Inserta el Precio Unitario</label>
-    <input type="text" class="form-control" name="PrecioUnitario" value="{{isset($pedido->PrecioUnitario)?$pedido->PrecioUnitario:''}}" id="PrecioUnitario">
-    
-    </div>
-
-<div class="form-grup">
-
-    <label for="Inserta el Precio Total">Inserta el Precio Total</label>
-    <input type="text" class="form-control" name="PrecioTotal" value="{{isset($pedido->PrecioTotal)?$pedido->PrecioTotal:''}}" id="PrecioTotal">
-        
-    </div>
-
-<div class="form-grup">
-
     <label for="Inserta el Estatus">Inserta el Estatus</label>
     <input type="text" class="form-control" name="Estatus" value="{{isset($pedido->Estatus)?$pedido->Estatus:''}}" id="Estatus">
             
